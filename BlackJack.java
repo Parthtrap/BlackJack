@@ -1,14 +1,16 @@
 package BlackJack;
 import java.util.*;
+class GameInfo
+{
+    public String Cards[] = new String[5];
+    public int Value = 0;
+    public boolean Want = true;
+}
 public class BlackJack {
     static int i = 0;
-    static String[] PlayerCards = new String[5];
-    static String[] AICards = new String[5];
-    static int PlayerValue = 0;
-    static int AIValue = 0;
+    static GameInfo Player = new GameInfo();
+    static GameInfo AI = new GameInfo();
     static Random Draw = new Random();
-    static boolean AIWant=true;
-    static boolean PlayerWant = true;
     public static void main(String[] args) {
         boolean again = true;
         char Input;
@@ -16,12 +18,12 @@ public class BlackJack {
         System.out.println("Welcome to BlackJack");
         System.out.println("Play Black Jack against Computer");
         while (again) {
-            AIWant = true;
-            PlayerWant = true;
-            PlayerValue = 0;
-            AIValue = 0;
-            Arrays.fill(PlayerCards, null);
-            Arrays.fill(PlayerCards, null);
+            Player.Want = true;
+            AI.Want = true;
+            Player.Value =0;
+            AI.Value =0;
+            Arrays.fill(Player.Cards, null);
+            Arrays.fill(Player.Cards, null);
             for (i = 0; i < 10; i++) {
                 if (i==0)
                 {
@@ -29,7 +31,7 @@ public class BlackJack {
                 }
                 else if (i%2 == 0)
                 {
-                    if (PlayerWant) {
+                    if (Player.Want) {
                         System.out.println("Hit(H)/Stay(S)?");
                         Input = Sc.next().charAt(0);
                         System.out.println("");
@@ -40,8 +42,8 @@ public class BlackJack {
                                 break;
                             case 'S':
                             case 's':
-                                PlayerWant = false;
-                                PlayerCards[i / 2] = "Stay";
+                                Player.Want = false;
+                                Player.Cards[i / 2] = "Stay";
                                 break;
                             default:
                                 System.out.println("Not a valid response... Retry");
@@ -50,20 +52,20 @@ public class BlackJack {
                         }
                     }
                     else {
-                        PlayerCards[i / 2] = "Stay";
+                        Player.Cards[i / 2] = "Stay";
                         Print(1);
                     }
                 }
                 else
                 {
-                    if(AIWant)
+                    if(AI.Want)
                         Rand(i);
                     else {
-                        AICards[i / 2] = "Stay";
+                        AI.Cards[i / 2] = "Stay";
                         Print(2);
                     }
                 }
-                if (!AIWant && !PlayerWant) {
+                if (!AI.Want && !Player.Want) {
                     i = 20;
                     FinalCheck();
                 }
@@ -142,20 +144,20 @@ public class BlackJack {
             default:break;
         }
         if (a%2 == 0) {
-            PlayerCards[a/2] = CardSymbol;
-            PlayerValue += CardValue;
+            Player.Cards[a/2] = CardSymbol;
+            Player.Value += CardValue;
             Print(1);
             Check(1);
         }
         else{
-            if (AIValue + CardValue <= 21)
+            if (AI.Value + CardValue <= 21)
             {
-                AIValue += CardValue;
-                AICards[a / 2] = CardSymbol;
+                AI.Value += CardValue;
+                AI.Cards[a / 2] = CardSymbol;
             }
             else {
-                AIWant = false;
-                AICards[a / 2] = "Stay";
+                AI.Want = false;
+                AI.Cards[a / 2] = "Stay";
             }
             Print(2);
             Check(2);
@@ -166,12 +168,12 @@ public class BlackJack {
     public static void Print(int a)
     {
         if (a==1) {
-            System.out.println("Your Cards are : " + Arrays.toString(PlayerCards));
-            System.out.println("Player Cards total value : " + PlayerValue + "\n");
+            System.out.println("Your Cards are : " + Arrays.toString(Player.Cards));
+            System.out.println("Player Cards total value : " + Player.Value + "\n");
         }
         else {
-            System.out.println("Computer Cards are : " + Arrays.toString(AICards));
-            System.out.println("Computer Cards total value : " + AIValue + "\n");
+            System.out.println("Computer Cards are : " + Arrays.toString(AI.Cards));
+            System.out.println("Computer Cards total value : " + AI.Value + "\n");
         }
     }
 
@@ -180,12 +182,12 @@ public class BlackJack {
     {
         if(a==1)
         {
-            if (PlayerValue > 21)
+            if (Player.Value > 21)
             {
                 System.out.println("Player 1 loose");
                 i=20;
             }
-            else if (PlayerValue == 21)
+            else if (Player.Value == 21)
             {
                 System.out.println("JackPot. Player 1 Wins");
                 i=20;
@@ -193,12 +195,12 @@ public class BlackJack {
         }
         else
         {
-            if (AIValue > 21)
+            if (AI.Value > 21)
             {
                 System.out.println("Computer loose");
                 i=20;
             }
-            else if (PlayerValue == 21)
+            else if (Player.Value == 21)
             {
                 System.out.println("JackPot. Computer Wins");
                 i=20;
@@ -211,11 +213,11 @@ public class BlackJack {
     {
         Print(1);
         Print(2);
-        if(PlayerValue < AIValue)
+        if(Player.Value < AI.Value)
         {
             System.out.println("Computer Wins");
         }
-        else if (PlayerValue == AIValue)
+        else if (Player.Value == AI.Value)
         {
             System.out.println("Its a Tie");
         }
