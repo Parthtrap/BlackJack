@@ -1,7 +1,7 @@
 package BlackJack;
 import java.util.*;
 public class BlackJack {
-    static int hello;
+    static int hi;
     static int i = 0;
     static String[] PlayerCards = new String[5];
     static String[] AICards = new String[5];
