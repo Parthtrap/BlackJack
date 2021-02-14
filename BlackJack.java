@@ -1,11 +1,15 @@
 package BlackJack;
 import java.util.*;
+
+
 class GameInfo
 {
     public String Cards[] = new String[5];
     public int Value = 0;
     public boolean Want = true;
 }
+
+
 public class BlackJack {
     static int i = 0;
     static GameInfo Player = new GameInfo();
