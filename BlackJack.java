@@ -1,11 +1,15 @@
 package BlackJack;
 import java.util.*;
+
+
 class GameInfo
 {
     public String Cards[] = new String[5];
     public int Value = 0;
     public boolean Want = true;
 }
+
+
 public class BlackJack {
     static int i = 0;
     static GameInfo Player = new GameInfo();
@@ -65,8 +69,8 @@ public class BlackJack {
                         Print(2);
                     }
                 }
-                if (!AI.Want && !Player.Want) {
-                    i = 20;
+                if (!AI.Want & !Player.Want) {
+                    i = 11;
                     FinalCheck();
                 }
             }
@@ -185,12 +189,12 @@ public class BlackJack {
             if (Player.Value > 21)
             {
                 System.out.println("Player 1 loose");
-                i=20;
+                i=11;
             }
             else if (Player.Value == 21)
             {
                 System.out.println("JackPot. Player 1 Wins");
-                i=20;
+                i=11;
             }
         }
         else
@@ -198,12 +202,12 @@ public class BlackJack {
             if (AI.Value > 21)
             {
                 System.out.println("Computer loose");
-                i=20;
+                i=11;
             }
             else if (Player.Value == 21)
             {
                 System.out.println("JackPot. Computer Wins");
-                i=20;
+                i=11;
             }
         }
     }
