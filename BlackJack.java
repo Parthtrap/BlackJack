@@ -65,8 +65,8 @@ public class BlackJack {
                         Print(2);
                     }
                 }
-                if (!AI.Want && !Player.Want) {
-                    i = 20;
+                if (!AI.Want & !Player.Want) {
+                    i = 11;
                     FinalCheck();
                 }
             }
@@ -185,12 +185,12 @@ public class BlackJack {
             if (Player.Value > 21)
             {
                 System.out.println("Player 1 loose");
-                i=20;
+                i=11;
             }
             else if (Player.Value == 21)
             {
                 System.out.println("JackPot. Player 1 Wins");
-                i=20;
+                i=11;
             }
         }
         else
