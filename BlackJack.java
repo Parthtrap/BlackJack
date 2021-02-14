@@ -202,12 +202,12 @@ public class BlackJack {
             if (AI.Value > 21)
             {
                 System.out.println("Computer loose");
-                i=20;
+                i=11;
             }
             else if (Player.Value == 21)
             {
                 System.out.println("JackPot. Computer Wins");
-                i=20;
+                i=11;
             }
         }
     }
