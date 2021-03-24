@@ -21,7 +21,7 @@ A Player Vs Computer game that test your luck and decision making skills
         10 - 10 \
         J  - 10 \
         Q  - 10 \
-        K  - 10 \
+        K  - 10 
 
 ## Credits
 
