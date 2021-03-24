@@ -5,6 +5,7 @@ import java.util.*;
 class GameInfo
 {
     public String Cards[] = new String[5];
+    public int Number = 0;
     public int Value = 0;
     public boolean Want = true;
 }
@@ -22,16 +23,31 @@ public class BlackJack {
         System.out.println("Welcome to BlackJack");
         System.out.println("Play Black Jack against Computer");
         while (again) {
+            Player.Number=0;
+            AI.Number=0;
             Player.Want = true;
             AI.Want = true;
             Player.Value =0;
             AI.Value =0;
             Arrays.fill(Player.Cards, null);
-            Arrays.fill(Player.Cards, null);
+            Arrays.fill(AI.Cards, null);
             for (i = 0; i < 10; i++) {
+                if (Player.Number == 5)
+                {
+                    System.out.println("Wow... Player manage to get 5 cards without exceeding 21");
+                    System.out.println("Player wins");
+                    break;
+                }
+                if (AI.Number == 5)
+                {
+                    System.out.println("Wow... Computer manage to get 5 cards without exceeding 21");
+                    System.out.println("Computer wins");
+                    break;
+                }
                 if (i==0)
                 {
                     Rand(i);
+                    Player.Number++;
                 }
                 else if (i%2 == 0)
                 {
@@ -54,6 +70,7 @@ public class BlackJack {
                                 i--;
                                 break;
                         }
+                        Player.Number++;
                     }
                     else {
                         Player.Cards[i / 2] = "Stay";
@@ -63,7 +80,10 @@ public class BlackJack {
                 else
                 {
                     if(AI.Want)
+                    {
                         Rand(i);
+                        AI.Number++;
+                    }
                     else {
                         AI.Cards[i / 2] = "Stay";
                         Print(2);
@@ -75,13 +95,22 @@ public class BlackJack {
                 }
             }
             System.out.println("\nWanna Play again? (Y/N)");
-            Input = Sc.next().charAt(0);
-            switch (Input) {
-                case 'N':
-                case 'n':
+            while(true)
+            {
+                Input = Sc.next().charAt(0);
+                if (Input == 'N' || Input == 'n')
+                {
                     again = false;
                     break;
-                default:break;
+                }
+                else if (Input == 'Y' || Input == 'y')
+                {
+                    break;
+                }
+                else
+                {
+                    System.out.println("Please Enter a valid Input... Y or N");
+                }
             }
         }
     }
@@ -188,12 +217,12 @@ public class BlackJack {
         {
             if (Player.Value > 21)
             {
-                System.out.println("Player 1 loose");
+                System.out.println("Player loose");
                 i=11;
             }
             else if (Player.Value == 21)
             {
-                System.out.println("JackPot. Player 1 Wins");
+                System.out.println("JackPot. Player Wins");
                 i=11;
             }
         }
